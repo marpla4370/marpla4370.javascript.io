@@ -79,7 +79,7 @@
         </section>
         <section id="contact">
             <h2>Contact Me</h2>
-            <form>
+            <form id="contact-form">
                 <div>
                     <label for="name">Sender Name:</label>
                     <input type="text" id="name" name="name" required>
@@ -145,18 +145,18 @@
                     successMsg.className = "success-text";
                     successMsg.textContent = `Thank you, ${nameInput}, your message has been sent successfully! ✅`;
 
-                    contact.appendChild(successMsg);
+                    contactSection.appendChild(successMsg);
 
                     submitBtn.textContent = "Submit";
                     submitBtn.disabled = false;
-                    contact.reset(); 
+                    contactForm.reset(); 
                 }, 2500); 
             } else {
                 alert("Please enter your name before submitting.");
         }
     });
         const newProjectPara = document.createElement("p");
-        newProjectPara.textContent = "🚀 Latest Update: I just finished a Javascript file that allows you to disocver your target heart rate range.";
+        newProjectPara.textContent = "🚀 Latest Update: I just finished a Javascript file that allows you to discover your target heart rate range.";
         newProjectPara.style.fontStyle = "italic";
     
         const aboutSection = document.getElementById("about");
