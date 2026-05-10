@@ -43,7 +43,7 @@
         <main>
         <section id="about">
             <h2>About Me</h2>
-            <p>Hello, Im a software devleopment student in college. I work from home, and im married with a dog.</p>
+            <p>Hello, Im a software development student in college. I work from home, and I'm married with a dog.</p>
             <ul id="skillsList"></ul>
         </section>
            
@@ -136,13 +136,43 @@
         submitBtn.addEventListener("click", function(event) {
             event.preventDefault();
             const nameInput = document.getElementById("name").value;
-            if(nameInput) {
-                alert("Thank you, " + nameInput + ", your message has been sent!");
+             if (nameInput) {
+                submitBtn.textContent = "Sending message...";
+                submitBtn.disabled = true; 
+
+                 setTimeout(() => {
+                    const successMsg = document.createElement("p");
+                    successMsg.textContent = `Thank you, ${nameInput}, your message has been sent successfully! ✅`;
+                    successMsg.style.color = "green";
+                    successMsg.style.fontWeight = "bold";
+
+                    contactForm.appendChild(successMsg);
+
+                    submitBtn.textContent = "Submit";
+                    submitBtn.disabled = false;
+                    contactForm.reset(); // Clears the form fields
+                }, 2500); // 2.5 second delay
             } else {
                 alert("Please enter your name before submitting.");
-            }
-        });
-   
+        }
+    });
+        const newProjectPara = document.createElement("p");
+        newProjectPara.textContent = "🚀 Latest Update: I just finished a Javascript file that allows you to disocver your target heart rate range.";
+        newProjectPara.style.fontStyle = "italic";
+    
+        const aboutSection = document.getElementById("about");
+        aboutSection.appendChild(newProjectPara);
+
+        const welcomeMsg = document.getElementById("welcome-msg");
+        welcomeMsg.style.fontSize = "2.5rem";
+        welcomeMsg.style.fontWeight = "bold";
+        welcomeMsg.style.color = "#4169E1";
+
+        const projectsHeading = document.querySelector("#projects h2");
+        projectsHeading.textContent = " My Portfolio Gallery";
+        projectsHeading.style.borderBottom = "2px solid #8F00FF";
+        projectsHeading.style.paddingBottom = "5px";
+           
     </script>
     </body>
 </html>
