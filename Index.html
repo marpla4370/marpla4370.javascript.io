@@ -145,11 +145,11 @@
                     successMsg.className = "success-text";
                     successMsg.textContent = `Thank you, ${nameInput}, your message has been sent successfully! ✅`;
 
-                    contactForm.appendChild(successMsg);
+                    contact.appendChild(successMsg);
 
                     submitBtn.textContent = "Submit";
                     submitBtn.disabled = false;
-                    contactForm.reset(); 
+                    contact.reset(); 
                 }, 2500); 
             } else {
                 alert("Please enter your name before submitting.");
