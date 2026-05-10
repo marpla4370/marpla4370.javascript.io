@@ -142,16 +142,15 @@
 
                  setTimeout(() => {
                     const successMsg = document.createElement("p");
+                    successMsg.className = "success-text";
                     successMsg.textContent = `Thank you, ${nameInput}, your message has been sent successfully! ✅`;
-                    successMsg.style.color = "green";
-                    successMsg.style.fontWeight = "bold";
 
                     contactForm.appendChild(successMsg);
 
                     submitBtn.textContent = "Submit";
                     submitBtn.disabled = false;
-                    contactForm.reset(); // Clears the form fields
-                }, 2500); // 2.5 second delay
+                    contactForm.reset(); 
+                }, 2500); 
             } else {
                 alert("Please enter your name before submitting.");
         }
