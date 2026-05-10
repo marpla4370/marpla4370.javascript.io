@@ -165,7 +165,34 @@
             personalDiv.classList.remove("hidden");
             uniDiv.classList.add("hidden");
         }
-
+           const myProjects = [
+    {
+        title: "Heart Rate Calculator",
+        summary: "A tool that calculates target heart rate ranges for fitness.",
+        icon: "placeholder",
+        link: "placeholder"
+    },
+    {
+        title: "Road Trip Calculator",
+        summary: "Calculates your cars gas efficiancy on road trips.",
+        icon: "placeholder",
+        link: "placeholder"
+    },
+    {
+        title: "Resturant Calculator",
+        summary: "Calculates tip for you and can help you split the bill with friends.",
+        icon: "placeholder",
+        link: "placeholder"
+    }
+];
+        let projectData;
+        
+        if (!sessionStorage.getItem('projectData')) {
+            sessionStorage.setItem('projectData', JSON.stringify(myProjects));
+            projectData = myProjects;
+        } else {
+            projectData = JSON.parse(sessionStorage.getItem('projectData'));
+        }
         const skills = ["HTML", "CSS", "JavaScript", "Git", "GitHub"];
         const listContainer = document.getElementById("skillsList");
         skills.forEach(skill => {
@@ -173,6 +200,22 @@
             li.textContent = skill;
             listContainer.appendChild(li);
         });
+           const projectContainer = document.querySelector(".project-links");
+            projectContainer.innerHTML = ""; // Clear existing placeholders
+            
+            projectData.forEach(project => {
+                const card = document.createElement("div");
+                card.className = "project-card";
+            
+                card.innerHTML = `
+                    <img src="${project.icon}" alt="${project.title}">
+                    <h3>${project.title}</h3>
+                    <p>${project.summary}</p>
+                    <a href="${project.link}">View Repo</a>
+                `;
+            
+                projectContainer.appendChild(card);
+            });
 
         const toggle = document.getElementById("darkModeToggle");
            
