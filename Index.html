@@ -20,9 +20,53 @@
             .hidden {
                 display: none;
             }
+            .modal-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000; 
+            }
+            .modal-content {
+                background-color: #fff;
+                padding: 30px;
+                border-radius: 8px;
+                text-align: center;
+                color: #333;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+                max-width: 400px;
+            }
+            #closeModalBtn {
+                margin-top: 15px;
+                padding: 10px 20px;
+                background-color: #4169E1;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            #closeModalBtn:hover {
+                background-color: #2e4cad;
+            }
+            .dark-mode .modal-content {
+                background-color: #2a2a2a;
+                color: #fff;
+            }
         </style>
     </head>
     <body>
+        <div id="statusModal" class="modal-overlay">
+            <div class="modal-content">
+                <h2>Developer Note</h2>
+                <p>This page is a work in progress. Thanks for visiting!</p>
+                <button id="closeModalBtn">Close</button>
+            </div>
+        </div>
         <div style="text-align: right; padding: 10px;">
             <label class="switch">
                 <input type="checkbox" id="darkModeToggle">
@@ -96,16 +140,19 @@
                     <label for="message">Message:</label>
                     <textarea id="message" name="message" rows="4" required></textarea>
                 </div>
-                <button type="submit" id="sButton">Submit</button>
+               <button type="submit" id="sButton" title="Click to send your message!">Submit</button>
             </form>
         </section>
     </main>
        <script>
-       const userNamePrompt = prompt("What is your name?");
-        const welcomeDisplay = document.getElementById("welcome-msg");
-        if (userNamePrompt && userNamePrompt.trim()) {
-            welcomeDisplay.textContent = `Welcome, ${userNamePrompt}!`;
-        }
+        const modal = document.getElementById("statusModal");
+        const closeModalBtn = document.getElementById("closeModalBtn");
+        
+        closeModalBtn.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+        
+        document.getElementById("welcome-msg").textContent = "Welcome to My Portfolio!";
 
         const projects = ["Project 1", "Project 2"];
         const uniDiv = document.getElementById("universityResources");
@@ -128,9 +175,29 @@
         });
 
         const toggle = document.getElementById("darkModeToggle");
+           
+       function applyDarkMode(isEnabled) {
+            if (isEnabled) {
+                document.body.classList.add("dark-mode");
+                toggle.checked = true;
+            } else {
+                document.body.classList.remove("dark-mode");
+                toggle.checked = false;
+            }
+        }
+           
         toggle.addEventListener("change", function() {
-            document.body.classList.toggle("dark-mode");
+            const isDark = toggle.checked;
+            applyDarkMode(isDark);
+            localStorage.setItem("themePreference", isDark ? "enabled" : "disabled");
         });
+           const savedTheme = localStorage.getItem("themePreference");
+
+            if (savedTheme === "enabled") {
+                applyDarkMode(true);
+            } else {
+                applyDarkMode(false);
+            }
            
         const submitBtn = document.getElementById("sButton");
         const contactSection = document.getElementById("contact"); 
